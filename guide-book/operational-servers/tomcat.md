@@ -1,6 +1,6 @@
-#Apache TOMCAT
-##Description:
-###intro:
+#A pache TOMCAT
+## Description:
+### intro:
 Apache tomcat is a simple & free web server, and developed as part of the Apache foundation.
 since the tomcat server has a very small footprint, and almost have no administrations cost, we may find in a lot of production enviroments.
 tomcat is mainly running java based web applications, witch deployed into it as a **war** file (Web Application aRchive).
@@ -30,10 +30,10 @@ since there is a wide usage of that web server, it has large amount of vulnerabi
 - tool documentation: https://tomcat.apache.org/tomcat-8.5-doc/index.html
 - harding tomcat: https://www.owasp.org/index.php/Securing_tomcat
 
-###notes:
+### notes:
 - during the course we will use ubuntu or centos only machines
 
-###configuration references:
+### configuration references:
 - harding tomcat: https://www.owasp.org/index.php/Securing_tomcat
 - connectors definitions
 
@@ -81,7 +81,7 @@ Vagrant.configure(2) do |config|
 end
 ```
 
-##important notes:
+## important notes:
 - main config file called **server.xml** located at /etc/tomcat* (**/etc/tomcat/server.xml**)
 - in case package installation placed all configs under versioned folder (such as /etc/tomcat7), you need to crease a symbolic link to /etc/tomcat 
     - use following command: **ln -s /etc/tomcat7 /etc/tomcat**
