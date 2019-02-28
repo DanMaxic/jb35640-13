@@ -1,5 +1,5 @@
-#HOME WORK #2
-##Introduction & details
+# HOME WORK #2
+## Introduction & details
 - given on: Wed, Feb 6, 2019
 - delivery date: Sun, Mar 3rd, 2019
 - delivery method: written on paper (printed), 
@@ -16,7 +16,7 @@
     - keep proper code styling 
     - more info you may find here: https://google.github.io/styleguide/shell.xml
      
-###Homework subjects:
+### Homework subjects:
 - Linux Administration:
   - package installation (apt\apt-get\yum)
   - Linux FS hierarchy ( 3rd party tool configuration) ()
@@ -35,12 +35,12 @@
 - vagrant:
   - vagrant commands: (validate, up, ssh, status, port, destroy, halt, resume )
   
-###Homework utilities to be used:
+### Homework utilities to be used:
 - vagrant - for proper development environments and easy use 
 - tomcat  - a 3rd party web server, that we will meet and work on that intensively.
 
 ## Homework: user story\client story
-###introduction:
+### introduction:
 Hello **student**,
 Welcome to _***Bilbi128-DevOps inc.***_, the leading DevOps consultancy firm in Israel. 
 The #1 company in customer care and professionalism.
@@ -49,13 +49,13 @@ You have sent to one of our most valuable clients, to take care of all their Dev
 When you approached to the client, one of their developers approaches you and shares with you an issue they are facing with.
 the developer is using a web application, hosted upon _**apache tomcat**_ web server (version 8). he needs some SLN to run a complete tomcat server from his laptop. he familiar with vagrant, and prefer to use it, since by using it, he able to build a new development server in seconds. The issue, as he sees, is that he doesn't familiar with tomcat well enough, and the info sec guys are driving him crazy with their demands.
 
-####Infosec demands:
+#### Infosec demands:
 - The tomcat server will be installed from closed & proven package.
 - The tomcat server will be harden (security wise)
 - The server will have a custom script, that will enable the users to manual change the TCP port, tomcat is listening to (by default, 8080)
 - The port modifier script, will be available to all current users, and future ones. 
 - The server will have a _WETTY_ server, to enable the remote SSH user via the web browser.
-####Expected Artifact:
+#### Expected Artifact:
 - The expected Artifact (what is need to send to the client), will be a folder that contains the following:
   - vagrant file (**to-deliver&print**) 
   - the **user-data.sh** script (**to-deliver&print**)
