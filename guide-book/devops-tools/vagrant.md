@@ -60,12 +60,12 @@ dpkg -i vagrant_2.2.4_x86_64.deb -y
 **Mac Installations:**
 - open the dmg file and run the installer
 
-##important notes:
+## important notes:
 - be extra carefull with the amount of resources you allocate to the virtual machine you are using.
 - as a cation, use 1 cpu & 1024mb ram.
 - try not to use the the GUI option, as a cation, set "virtualbox.gui = false"
 
-##Tool work flow:
+## Tool work flow:
 a basic workflow for vagrant based project is as following:
 0. make sure vagrant and virtual box are installed properly.
 1. create a project directory (may be part of a git repo)
@@ -98,7 +98,7 @@ a basic workflow for vagrant based project is as following:
     - note: it will export the machine into package.box file
 13. if we want to finish the work, and destroy the created machine, run **vagrant destroy**
 
-###Vagrantfile examples:
+### Vagrantfile examples:
 
 simple vagrantfile for a single virtual machine running ubuntu:
 ```yaml
@@ -130,14 +130,14 @@ Vagrant.configure(2) do |config|
 end
 ```
 
-##provitioning referance:
+## provitioning referance:
 
-####File Provisioner:
+#### File Provisioner:
 The Vagrant file provisioner allows you to upload a file or directory from the host machine to the guest machine.
-#####attributes:
+##### attributes:
 - inline (required, if path not defined)- the inline script to run 
 - path (required)- the destination file in the virtual machine 
-#####File Provisioner example:
+##### File Provisioner example:
 **short syntax**
 ```yaml
   config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
@@ -153,14 +153,14 @@ The Vagrant file provisioner allows you to upload a file or directory from the h
 ```
 **note:** in the long syntax, the attributes' value are set by using '=', and not ':' . 
 
-####shell Provisioner:
+#### shell Provisioner:
 The Vagrant Shell provisioner allows you to upload and execute a script within the guest machine.
-#####attributes:
+##### attributes:
 - **inline** (required, if path not defined)- the inline script to run 
 - **path** (required, , if inline not defined)- the path of the shell script to copy and excecute on the virtual machine
 - args
 
-#####shell Provisioner example:
+##### shell Provisioner example:
 **short syntax (path to script)**
 ```yaml
   config.vm.provision "shell", path: "script.sh"
