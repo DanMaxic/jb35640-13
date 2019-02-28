@@ -64,6 +64,7 @@ dpkg -i vagrant_2.2.4_x86_64.deb -y
 - be extra carefull with the amount of resources you allocate to the virtual machine you are using.
 - as a cation, use 1 cpu & 1024mb ram.
 - try not to use the the GUI option, as a cation, set "virtualbox.gui = false"
+
 ##Tool work flow:
 a basic workflow for vagrant based project is as following:
 0. make sure vagrant and virtual box are installed properly.
