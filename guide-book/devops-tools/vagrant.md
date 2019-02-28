@@ -1,6 +1,6 @@
-#VAGRANT
-##Description:
-###intro:
+# VAGRANT
+## Description:
+### intro:
 Vagrant is a tool for building and managing virtual machine environments in a single workflow. With an easy-to-use workflow and focus on automation, Vagrant lowers development environment setup time, increases production parity, and makes the "works on my machine" excuse a relic of the past. (taken from official site)
 
 using this utility, enables us to create and use a complete virtual machine, with all needed tools with a push of a button. by using this tool, we are able to build and simulate situations and server easily and within a push of a button.
@@ -24,10 +24,10 @@ see more info below for more information about it's components & tool workflow.
 - tool CLI reference: https://www.vagrantup.com/docs/cli/
 - list of 'boxes' available to use: https://app.vagrantup.com/boxes/search?provider=virtualbox
 
-###notes:
+### notes:
 - during the course we will use ubuntu or centos only machines
 
-###configuration references:
+### configuration references:
 - https://www.vagrantup.com/docs/vagrantfile/
 - Vagrantfile reference: virtual machine settings: https://www.vagrantup.com/docs/vagrantfile/machine_settings.html
 - provisioning settings: https://www.vagrantup.com/docs/provisioning/
