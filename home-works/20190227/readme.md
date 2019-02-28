@@ -42,7 +42,7 @@
 ## Homework: user story\client story
 ### introduction:
 Hello **student**,
-Welcome to _***Bilbi128-DevOps inc.***_, the leading DevOps consultancy firm in Israel. 
+Welcome to _**Bilbi128-DevOps inc.**_, the leading DevOps consultancy firm in Israel. 
 The #1 company in customer care and professionalism.
 You have sent to one of our most valuable clients, to take care of all their DevOps needs.
 
