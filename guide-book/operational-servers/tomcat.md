@@ -87,7 +87,7 @@ end
     - use following command: **ln -s /etc/tomcat7 /etc/tomcat**
     - this way you make sure that the tomcat server are managed always with the same way
 - **please note, the file is written as XML**
-    - meaning some parts in the file remarked (noted) with XML remark (<!-- and -->)
+    - meaning some parts in the file remarked (noted) with XML remark ('<!--' and '-->')
 
 ## tomcat port configurations:
 - listening port in tomcat configured in the **Connector** object as following
