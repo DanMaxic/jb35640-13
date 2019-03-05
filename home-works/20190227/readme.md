@@ -65,5 +65,19 @@ the developer is using a web application, hosted upon _**apache tomcat**_ web se
   
  
 
+ ```bash
+.
+├── final-artifact
+│   ├── Vagrantfile
+│   ├── machine-content
+│   │   └── port-modifier.sh
+│   ├── readme.md
+│   ├── sln-diagram.png
+│   └── user-data-scripts
+│       ├── user-data.sh
+│       └── wetty-installer.sh
+└── readme.md
+
+3 directories, 7 files
 
 
