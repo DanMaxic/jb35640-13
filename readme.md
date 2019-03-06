@@ -1,5 +1,9 @@
 # DEVOPS COURSE
 ---
+## news (updated on Mar 5th, 2019)
+- PLEASE READ THE WHOLE MANUALS!!!
+
+
 ## news (updated on Mar 3rd, 2019)
 - HW from the 20190227, cay be delivered on Wen, 6th Mar 2019.
 - on the lesson today we will review the HW & perform Introduction to the DevOps world
