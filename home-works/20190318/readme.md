@@ -7,10 +7,7 @@
   - TASK #3 - no need, but still practice 
   - TASK #3 - written on paper (printed), 
 - item(s) to deliver: 
-  - please note, deliver (or print) only tasks that are marked as **to-deliver**
-  - script code analysis by component, Please use the word document attached
-  - printed script(s) file (code)
-  - pseudo code, describing the what the script is performing, and why you choose that way to implement.
+  - Please use the word\open-office template in order to deliver the homework (homework.docx\homework.odt).
   - short diagram, describes the infrastructure created by you. use draw.io to generate an image of that (https://draw.io) 
 - *DONOT FORGET*: please write your full name, and your ID 
 - some guide lines:
@@ -25,11 +22,11 @@
 - **Task #2: CI 101 -manual CI**
   - Sub-task 2.1: **maven based build** 
     - desc: we will perform step by step a maven build (for java\scala applications)
-    - please see task2-1.md
+    - please see task2.md
     - the output will be a bash script, **mvn-build.sh**
   - Sub-task 2.2: **MSbuild based build**
     - desc: we will perform step by step a MSbuild build (for .NET applications)
-    - please see task2-2.md
+    - please see task2.md
     - the output will be a bash script, **msbuild-build.bat**
   - Sub-task 2.3: **NPM based build**
     - desc: we will perform step by step a node build (for node.js applications)
@@ -37,11 +34,11 @@
     - the output will be a bash script, **npm-build.sh**
   - Sub-task 2.4: **GO based build**
     - desc: we will perform step by step a node build (for node.js applications)
-    - please see task2-4.md
+    - please see task2.md
     - the output will be a bash script, **golang-build.sh**
   - Sub-task 2.5: **make based build**
     - desc: we will get familer with the make\makefile build framework
-    - please see task2-5.md
+    - please see task2.md
     - the output will be a bash script, **Makefile**
 - **Task #3: designing the DevOps infrastructure**
   - desc: we will perform step by step a MSbuild build (for .NET applications)
