@@ -1,5 +1,5 @@
-#**Task #2: CI 101 -manual CI**
-##content table
+# **Task #2: CI 101 -manual CI**
+## content table
 * Task #2: CI 101 -manual CI
   * Task review
   * Task inro
@@ -17,7 +17,7 @@
     * 2.5: - you may skip that, makefile (this is a bonus)
     
   
-##Task review
+## Task review
 - Sub-task 2.1: **maven based build** 
   - desc: we will perform step by step a maven build (for java\scala applications)
   - please see task2-1.md
@@ -38,7 +38,7 @@
   - desc: we will get familer with the make\makefile build framework
   - please see task2-5.md
   - the output will be a bash script, **Makefile**
-##SUB TASKS:
+## SUB TASKS:
 ### sub-task 2.1-2.4:
 look on the following table, for each language (subtask), you need to produce a CI script end-to-end (from pulling until loading to nexus).
 
@@ -63,7 +63,7 @@ look on the following table, for each language (subtask), you need to produce a 
  -- skip for now
 
 
-##Task inro
+## Task inro
 On our last lesson we reviewed the basics of the CI proccess, let's perform a short recup:
 * a simple CI cycle is the process of pulling a source code, and transform it into usefull artifact, and than upload it into an **Artifact Repository**.
 * the steps are usually are:
@@ -77,8 +77,8 @@ On our last lesson we reviewed the basics of the CI proccess, let's perform a sh
   * publish the outcome artifacts into an Artifact repository
   
 On each and every sub task, we will walk throw the CI process of each specific language, and than you will have to adjust the CI script to suite the task given earlier.
-##How to solve the task:
-###Step 1: preppier the CI basic script:
+## How to solve the task:
+### Step 1: preppier the CI basic script:
 since the CI process is built of basic 3 steps (Source code pull, the build ans the publish), we may imagine an pseudo script like following:
 ```bash
 #!/bin/bash
@@ -121,7 +121,7 @@ main
 ```
 After doing so, let's continue
 
-###Step 2: Basic ci operations in java environment
+### Step 2: Basic ci operations in java environment
 
 As you may recall, we saw the following:
 * To pull the source code we excecuted the following:
@@ -146,7 +146,7 @@ mvn deploy:deploy-file \
   -Durl=https://localhost:8081/repository/maven-snapshots/
 ``` 
 
-###Step 3: refactoring the ci script, part I: adjust the ci script to other java projects
+### Step 3: refactoring the ci script, part I: adjust the ci script to other java projects
 we may notice that when we want to adjust the script to other java projects, we need to modify only the following:
 * the only changes needed are:
   * on the **sourceCodePull** function: 
@@ -157,7 +157,7 @@ we may notice that when we want to adjust the script to other java projects, we 
     * all artifact's attributes, to load to artifact repository
     
 so, we may solve that, we may use variables in our bash script
-####variables declarations:
+#### variables declarations:
 ```bash
 GIT_REPO_URI="https://github.com/zivkashtan/course.git"
 MVN_ACTION="package"
@@ -168,7 +168,7 @@ ARTIFACT_Dpackaging="pom"
 ARTIFACT_file="output/timetracker.war"
 NEXUS_REPO_URL="https://localhost:8081/repository/maven-snapshots"
 ```
-####variable usage example:
+#### variable usage example:
 here an example of the variable usage:
 ```bash
 git clone ${GIT_REPO_URI}
@@ -176,7 +176,7 @@ git clone ${GIT_REPO_URI}
 ```bash
 mvn ${MVN_ACTION}
 ```
-###Step 4: write down the ci script, and test that
+### Step 4: write down the ci script, and test that
 you may test the CI script you wrote, against other java projects:
 
 here are some git repos to review:
@@ -186,7 +186,7 @@ here are some git repos to review:
 * [https://github.com/google/guava](https://github.com/google/guava.git)
   * git URI: https://github.com/google/guava.git
   * that project if stand by itself.
-###Step 5: refactoring the ci script, part II: adjust the ci script to other programing languages and tools:
+### Step 5: refactoring the ci script, part II: adjust the ci script to other programing languages and tools:
 Now, after adjusting the ci script to other java based projects, and verified that it working properly, we want to make it more generic.
 
 Generic ci build script, meaning that the CI script will not only serve java based projects, but also other programing languages, and other SCM systems.
@@ -258,7 +258,7 @@ curl -v \
 ```
       
 so, we may solve that, we may use variables in our bash script
-####variables declarations:
+#### variables declarations:
 ```bash
 # PARAMS
 ### SCM CONFIGS
@@ -281,7 +281,7 @@ ARTIFACT_Dpackaging="pom"
 ARTIFACT_file="output/timetracker.war"
 ```
 
-####variables declarations (java example):
+#### variables declarations (java example):
 ```bash
 # PARAMS
 ### ARTIFACT ATTRS
@@ -321,11 +321,11 @@ PUBLISH_TOOL_COMMAND="${PUBLISH_TOOL} ${PUBLISH_TOOL_METHOD} -F r=${SCM_REPO_URI
 ```
 
 
-###Step 6: write down the new ci script, and test that using the sub tasks tasks:
+### Step 6: write down the new ci script, and test that using the sub tasks tasks:
 good luck
-###Step 7: preppier the CI environment (build tools and other stuff)
-####SCM client tools: 
-#####GIT (and GitHub)
+### Step 7: preppier the CI environment (build tools and other stuff)
+#### SCM client tools: 
+##### GIT (and GitHub)
 * git util
 ```bash
 yum update -y && yum install -y git
@@ -335,7 +335,7 @@ yum update -y && yum install -y git
 GIT_REPO_URI="https://github.com/zivkashtan/course.git"
 git clone ${GIT_REPO_URI}
 ```
-#####TFS
+##### TFS
 * TFS (and visualstudio.com\AZURE devops):
 * download the TFS everywhere 
   * direct link: [TEE-CLC-14.134.0.zip](https://github.com/Microsoft/team-explorer-everywhere/releases/download/14.134.0/TEE-CLC-14.134.0.zip)
@@ -352,7 +352,7 @@ tf workspace /new citest /noprompt /collection:${TFS_COLLECTION} /login:${TFS_US
 tf workfold "$/" . /map /workspace:citest /collection:${TFS_COLLECTION} /login:${TFS_USER},${TFS_PASS}
 tf get \$/ /overwrite /recursive /force /noprompt /login:${TFS_USER},${TFS_PASS}
 ```
-#####SVN
+##### SVN
 * Installing tool:
 ```bash
 yum update -y && yum install subversion -y
@@ -364,7 +364,7 @@ svn checkout ${SVN_REPO_URI}
 ```
 
 #### Build client tools: 
-#####MAVEN
+##### MAVEN
 * Installation
 ```bash
 sudo yum update -y && sudo yum install java -y
@@ -385,7 +385,7 @@ more info:
 * **READ THAT**: https://mincong-h.github.io/2018/08/04/maven-deploy-artifacts-to-nexus/
 * **READ THAT**: https://maven.apache.org/guides/mini/guide-3rd-party-jars-remote.html
 
-#####.NET (dotnet)
+##### .NET (dotnet)
 * Installation
 ```bash
 sudo rpm -Uvh https://packages.microsoft.com/config/rhel/7/packages-microsoft-prod.rpm
@@ -409,7 +409,7 @@ more info:
 * **READ THAT**: https://neelbhatt.com/2018/06/17/guide-to-create-and-run-net-core-application-using-cli-tools-net-core-cli-part-i/
 
 
-#####NODE.JS (npm)
+##### NODE.JS (npm)
 * Installation
 ```bash
 yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -429,7 +429,7 @@ more info:
 * **READ THAT**: https://blog.sonatype.com/using-nexus-3-as-your-repository-part-2-npm-packages
 
 
-#####GoLang (go)
+##### GoLang (go)
 * Installation
 ```bash
 wget https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz
