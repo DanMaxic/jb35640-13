@@ -1,0 +1,69 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANT_BOX = "centos/7"
+
+
+# tools installations:
+#   - wetty: 2020
+#   - jenkins: 8080
+#   - nexus: 9090
+#   - tomcat: 8080
+#
+
+Vagrant.configure('2') do |config|
+
+  config.vm.box = "centos/7"
+  config.vm.provider 'virtualbox' do |vb|
+    vb.linked_clone = true
+    vb.memory =  1024
+    vb.cpus = 1
+  end
+
+
+  # Jenkins server
+  # port range: 1xxxx
+  config.vm.define :ci_server do |server|
+    server.vm.hostname="ci-server"
+    server.vm.provider ('virtualbox') { | vb |  vb.name= "#{server.vm.hostname}" }
+
+    server.vm.provision "shell", path: "machines-user-data/_common.sh"
+    server.vm.provision "shell", path: "machines-user-data/_wetty.sh"
+    server.vm.provision "shell", path: "machines-user-data/#{server.vm.hostname}.sh"
+
+    config.vm.network "private_network", ip: "172.16.4.100", auto_config: false
+    server.vm.network "forwarded_port", guest: 2020, host: 12020
+    server.vm.network "forwarded_port", guest: 8080, host: 18080
+
+  end
+
+  # Nexus server
+  # port range: 2xxxx
+  config.vm.define :ci_nexus do |server|
+    server.vm.hostname="ci-nexus"
+    server.vm.provider ('virtualbox') { | vb |  vb.name= "#{server.vm.hostname}" }
+    server.vm.provision "shell", path: "machines-user-data/_common.sh"
+    server.vm.provision "shell", path: "machines-user-data/_wetty.sh"
+    server.vm.provision "shell", path: "machines-user-data/#{server.vm.hostname}.sh"
+
+    config.vm.network "private_network", ip: "172.16.4.101", auto_config: false
+    server.vm.network "forwarded_port", guest: 2020, host: 22020
+    server.vm.network "forwarded_port", guest: 9090, host: 29090
+  end
+
+  # Jenkins server
+  # port range: 3xxxx
+  config.vm.define :web_server do |server|
+    server.vm.hostname="web-server"
+    server.vm.provider ('virtualbox') { | vb |  vb.name= "#{server.vm.hostname}" }
+    server.vm.provision "shell", path: "machines-user-data/_common.sh"
+    server.vm.provision "shell", path: "machines-user-data/_wetty.sh"
+    server.vm.provision "shell", path: "machines-user-data/#{server.vm.hostname}.sh"
+
+    config.vm.network "private_network", ip: "172.16.4.102", auto_config: false
+    server.vm.network "forwarded_port", guest: 2020, host: 32020
+    server.vm.network "forwarded_port", guest: 8080, host: 38080
+  end
+
+
+end

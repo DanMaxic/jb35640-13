@@ -1,5 +1,24 @@
 # DEVOPS COURSE
 ---
+## news (updated on Mar 31th, 2019)
+- maven issues:
+  
+  after investigating, the root cause for mvn not working properly, is fact maven was installed with older version, here is the fix:
+```bash
+wget https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz -P /tmp
+sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
+sudo ln -s /opt/apache-maven-3.6.0 /opt/maven
+sudo ln -s /opt/maven/bin/mvn /usr/local/bin/mvn
+mvn --version
+```
+What we are going to do today: 
+- translating jenkins "free-style" job into pipeline 
+- deploying the output artifact into a target server:
+  - how to deploy using jenkins node agent
+  - using a "push method" from jenkins 
+- introduction to docker
+
+
 ## news (updated on Mar 20th, 2019)
 - PLEASE READ THE WHOLE MANUALS!!!
 

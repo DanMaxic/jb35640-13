@@ -4,7 +4,7 @@
 - delivery date: Sun, Mar 24, 2019
 - delivery method: 
   - TASK #1 - no need, but still practice 
-  - TASK #3 - no need, but still practice 
+  - TASK #2 - no need, but still practice 
   - TASK #3 - written on paper (printed), 
 - item(s) to deliver: 
   - Please use the word\open-office template in order to deliver the homework (homework.docx\homework.odt).
