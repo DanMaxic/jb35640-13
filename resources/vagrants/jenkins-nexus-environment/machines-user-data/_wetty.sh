@@ -36,7 +36,8 @@ EOF
 }
 
 function main() {
-    installWetty
+    #installWetty
+    echo "skip"
 }
 
 main

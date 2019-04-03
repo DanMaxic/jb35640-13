@@ -24,8 +24,13 @@ function installDocker(){
 }
 
 function installJenkins(){
+
+  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
   echo "±±±±±±±±±±±±±>install jenkins"
-  yum install -y https://prodjenkinsreleases.blob.core.windows.net/redhat-stable/${JENKINS_REPO_URI}.noarch.rpm java
+  #yum install -y https://prodjenkinsreleases.blob.core.windows.net/redhat-stable/${JENKINS_REPO_URI}.noarch.rpm java
+  yum install jenkins -y
+
   systemctl enable jenkins
   systemctl start jenkins
 }
@@ -45,7 +50,7 @@ function installMaven(){
   wget https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz -P /tmp
   sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
   sudo ln -s /opt/apache-maven-3.6.0 /opt/maven
-  sudo ln -s /opt/maven/bin/mvn /usr/local/bin/mvn
+  sudo ln -s /opt/maven/bin/mvn /usr/bin/mvn
   mvn --version
 }
 

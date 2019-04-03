@@ -14,7 +14,11 @@ VAGRANT_BOX = "centos/7"
 Vagrant.configure('2') do |config|
 
   config.vm.box = "centos/7"
+  #config.vm.network "public_network"
   config.vm.provider 'virtualbox' do |vb|
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+
     vb.linked_clone = true
     vb.memory =  1024
     vb.cpus = 1
@@ -31,7 +35,7 @@ Vagrant.configure('2') do |config|
     server.vm.provision "shell", path: "machines-user-data/_wetty.sh"
     server.vm.provision "shell", path: "machines-user-data/#{server.vm.hostname}.sh"
 
-    config.vm.network "private_network", ip: "172.16.4.100", auto_config: false
+    server.vm.network "private_network", ip: "172.16.4.100", auto_config: true
     server.vm.network "forwarded_port", guest: 2020, host: 12020
     server.vm.network "forwarded_port", guest: 8080, host: 18080
 
@@ -46,9 +50,10 @@ Vagrant.configure('2') do |config|
     server.vm.provision "shell", path: "machines-user-data/_wetty.sh"
     server.vm.provision "shell", path: "machines-user-data/#{server.vm.hostname}.sh"
 
-    config.vm.network "private_network", ip: "172.16.4.101", auto_config: false
+    server.vm.network "private_network", ip: "172.16.4.101", auto_config: true
     server.vm.network "forwarded_port", guest: 2020, host: 22020
     server.vm.network "forwarded_port", guest: 9090, host: 29090
+    server.vm.network "forwarded_port", guest: 8081, host: 28081
   end
 
   # Jenkins server
@@ -60,7 +65,7 @@ Vagrant.configure('2') do |config|
     server.vm.provision "shell", path: "machines-user-data/_wetty.sh"
     server.vm.provision "shell", path: "machines-user-data/#{server.vm.hostname}.sh"
 
-    config.vm.network "private_network", ip: "172.16.4.102", auto_config: false
+    server.vm.network "private_network", ip: "172.16.4.102", auto_config: true
     server.vm.network "forwarded_port", guest: 2020, host: 32020
     server.vm.network "forwarded_port", guest: 8080, host: 38080
   end
