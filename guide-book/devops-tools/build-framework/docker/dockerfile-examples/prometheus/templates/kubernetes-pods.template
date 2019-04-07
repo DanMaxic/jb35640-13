@@ -1,0 +1,93 @@
+##### => kubernetes-pods
+  - job_name: 'kubernetes-pods-{{CLUSTER_NAME}}'
+    kubernetes_sd_configs:
+    - role: pod
+      api_server: '{{CLUSTER_API_SERVER_URI}}'
+      tls_config:
+        insecure_skip_verify: true
+      bearer_token: {{CLUSTER_BEARER_TOKEN}}
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    bearer_token: {{CLUSTER_BEARER_TOKEN}}
+
+    relabel_configs:
+    #scrape config
+
+    # `prometheus.io/scrape`: Only scrape pods that have a value of `true`
+    - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+      action: keep
+      regex: true
+
+    # `prometheus.io/path`: If the metrics path is not `/metrics` override this.
+    - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+      separator: ;
+      regex: ()
+      target_label: __meta_kubernetes_pod_annotation_prometheus_io_path
+      replacement: /metrics
+      action: replace
+
+    # `prometheus.io/port`: Scrape the pod on the indicated port instead of the default of `9102`.
+    - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_port]
+      separator: ;
+      regex: ()
+      target_label: __meta_kubernetes_pod_annotation_prometheus_io_port
+      replacement: 8091
+      action: replace
+
+    - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_pod_name, __meta_kubernetes_pod_annotation_prometheus_io_port,__meta_kubernetes_pod_annotation_prometheus_io_path]
+      regex: (.+);(.+);(.+);(.+)
+      target_label: __metrics_path__
+      replacement: /api/v1/namespaces/$1/pods/$2:$3/proxy$4
+      action: replace
+
+    - separator: ;
+      regex: (.*)
+      target_label: __address__
+      replacement: {{CLUSTER_API_SERVER}}:443
+      action: replace
+
+    #results relabling
+    - action: labelmap
+      regex: __meta_kubernetes_pod_label_(.+)
+      target_label:  ${1}
+      replacement:   k8_label_${1}
+
+    - replacement: '{{CLUSTER_NAME}}'
+      target_label: k8_cluster_name
+
+    - source_labels: [__meta_kubernetes_namespace]
+      action: replace
+      target_label: k8_namespace
+
+    - source_labels: [__meta_kubernetes_pod_name]
+      action: replace
+      target_label: k8_pod_name
+
+    - source_labels: [__meta_kubernetes_pod_node_name]
+      action: replace
+      target_label: k8_node_name
+
+    - source_labels: [__meta_kubernetes_pod_label_app]
+      action: replace
+      target_label: k8_appname
+
+    - replacement: '{{BAIKO_ENV_PROFILE}}'
+      target_label: baiko_env_name
+
+    - replacement: '{{BAIKO_ENV_PROFILE}}'
+      target_label: baiko_env_profile
+
+    - replacement: '{{AWS_ACCOUNT_ALIAS}}'
+      target_label: aws_account_alias
+
+    - replacement: '{{CLUSTER_API_SERVER}}'
+      target_label: k8_api_server
+
+    - replacement: 'k8s_pod'
+      target_label: prom_root_object_type
+
+    - source_labels: [__meta_kubernetes_pod_label_app]
+      action: replace
+      target_label: prom_root_applications
+

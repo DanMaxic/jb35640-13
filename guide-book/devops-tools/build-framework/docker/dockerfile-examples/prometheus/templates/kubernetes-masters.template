@@ -1,0 +1,35 @@
+##### => kubernetes-masters
+  - job_name: 'kubernetes-masters-{{CLUSTER_NAME}}'
+    kubernetes_sd_configs:
+    - role: endpoints
+      api_server: '{{CLUSTER_API_SERVER_URI}}'
+      tls_config:
+        insecure_skip_verify: true
+      bearer_token: {{CLUSTER_BEARER_TOKEN}}
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    bearer_token: {{CLUSTER_BEARER_TOKEN}}
+
+    relabel_configs:
+    - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+      action: keep
+      regex: default;kubernetes;https
+
+    - replacement: '{{CLUSTER_NAME}}'
+      target_label: k8_cluster_name
+
+    - replacement: '{{AWS_ACCOUNT_ALIAS}}'
+      target_label: aws_account_alias
+
+    - replacement: '{{BAIKO_ENV_PROFILE}}'
+      target_label: baiko_env_name
+
+    - replacement: '{{BAIKO_ENV_PROFILE}}'
+      target_label: baiko_env_profile
+
+    - replacement: '{{CLUSTER_API_SERVER}}'
+      target_label: k8_api_server
+
+    - replacement: 'k8s_master'
+      target_label: prom_root_object_type

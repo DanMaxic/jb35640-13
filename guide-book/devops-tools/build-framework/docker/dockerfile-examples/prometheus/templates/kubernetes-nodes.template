@@ -1,0 +1,45 @@
+##### => kubernetes-nodes
+  - job_name: 'kubernetes-nodes-{{CLUSTER_NAME}}'
+    kubernetes_sd_configs:
+    - role: node
+      api_server: '{{CLUSTER_API_SERVER_URI}}'
+      tls_config:
+        insecure_skip_verify: true
+      bearer_token: {{CLUSTER_BEARER_TOKEN}}
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    bearer_token: {{CLUSTER_BEARER_TOKEN}}
+
+    relabel_configs:
+    - action: labelmap
+      regex: __meta_kubernetes_node_label_(.+)
+
+    - target_label: __address__
+      replacement: {{CLUSTER_API_SERVER}}:443
+
+    - source_labels: [__meta_kubernetes_node_name]
+      regex: (.+)
+      target_label: __metrics_path__
+      replacement: /api/v1/nodes/${1}/proxy/metrics
+
+    - replacement: '{{AWS_ACCOUNT_ALIAS}}'
+      target_label: aws_account_alias
+
+    - replacement: '{{CLUSTER_NAME}}'
+      target_label: k8_cluster_name
+
+    - replacement: '{{BAIKO_ENV_PROFILE}}'
+      target_label: baiko_env_name
+
+    - replacement: '{{BAIKO_ENV_PROFILE}}'
+      target_label: baiko_env_profile
+
+    - replacement: '{{AWS_ACCOUNT_ALIAS}}'
+      target_label: aws_account_alias
+
+    - replacement: '{{CLUSTER_API_SERVER}}'
+      target_label: k8_api_server
+
+    - replacement: 'k8s_node'
+      target_label: prom_root_object_type
