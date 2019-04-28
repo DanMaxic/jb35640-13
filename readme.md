@@ -3,7 +3,7 @@
 ## news (updated on Apr 28th, 2019)
 
 Class Practice answer:
-'''bash
+```bash
 node {
    
    stage('Preparation') {
@@ -27,8 +27,7 @@ node {
    }
    
 }
-
-'''
+```
 
 ---
 ## news (updated on Mar 31th, 2019)
