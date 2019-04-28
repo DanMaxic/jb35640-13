@@ -1,0 +1,23 @@
+node {
+   
+   stage('Preparation') {
+	  git 'https://github.com/zivkashtan/course.git'
+   }
+   stage('Build') {
+	  def mvnHome = tool name: '3.6', type: 'maven'
+      sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+	  
+	  writeFile file: "Dockerfile", text: """
+			FROM tomcat:8.0.20-jre8
+			COPY ./web/target/*.war /usr/local/tomcat/webapps/
+		"""
+		sh "docker build -t time-tracker:${env.BUILD_ID} ."
+
+		sh """
+		  docker login -u admin -p admin123 localhost:8123
+		  docker tag time-tracker:${env.BUILD_ID} localhost:8123/time-tracker:latest
+		  docker push localhost:8123/time-tracker:latest
+		"""
+   }
+   
+}
