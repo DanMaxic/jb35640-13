@@ -1,5 +1,9 @@
 # DEVOPS COURSE
 ---
+## news (updated on May 3rd, 2019)
+Class practice was uploaded here
+
+---
 ## news (updated on Apr 28th, 2019)
 
 Class Practice answer:
