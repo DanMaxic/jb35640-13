@@ -3,7 +3,8 @@
 
 ---
 ## news (updated on May 15th, 2019)
-Class practice was uploaded here
+1. under "Training Sessions" directory there is the updated meetings scheduler
+2. here some exercise for Ansible
 
 http://ansible.redhatgov.io/standard/core/index.html
 ---
