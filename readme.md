@@ -1,4 +1,11 @@
 # DEVOPS COURSE
+
+
+---
+## news (updated on May 15th, 2019)
+Class practice was uploaded here
+
+http://ansible.redhatgov.io/standard/core/index.html
 ---
 ## news (updated on May 3rd, 2019)
 Class practice was uploaded here
