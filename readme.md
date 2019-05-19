@@ -2,6 +2,11 @@
 
 
 ---
+
+## news (updated on May 19th, 2019)
+1. under "Training Sessions" directory there is the updated meetings scheduler
+https://interactive.linuxacademy.com/diagrams/ThePodofMinerva.html
+
 ## news (updated on May 15th, 2019)
 1. under "Training Sessions" directory there is the updated meetings scheduler
 2. here some exercise for Ansible
