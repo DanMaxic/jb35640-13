@@ -1,8 +1,18 @@
 
 
-#k8s class practice
+# k8s class practice
 
-##minikube installation
+```json
+
+{
+  "hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"],
+  "metrics-addr" : "0.0.0.0:9323",
+  "experimental" : true
+}
+
+
+```
+## minikube installation
 
 
 ###Linux Installation
