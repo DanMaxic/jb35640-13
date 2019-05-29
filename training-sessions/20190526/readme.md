@@ -1,7 +1,7 @@
 
 
 # k8s class practice
-
+Expose local docker top port 
 ```json
 
 {
@@ -15,27 +15,30 @@
 ## minikube installation
 
 
-###Linux Installation
+### Linux Installation
 ```bash
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
   && chmod +x minikube
 ```
 
-###Windows instalattion
+### Windows instalattion
 ```bash
 
 ```
 
-###starting minikube
+### starting minikube
 ```bash
 minikube start
 ```
 minikube start
+## create the k8s ui dashboard
+```bash
+https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+```
 
+## testing
 
-##testing
-
-###Create an echo server deployment
+### Create an echo server deployment
 
 ```bash
 kubectl run hello-minikube --image=k8s.gcr.io/echoserver:1.10 --port=8080
@@ -45,8 +48,8 @@ kubectl run hello-minikube --image=k8s.gcr.io/echoserver:1.10 --port=8080
 kubectl expose deployment hello-minikube --type=NodePort
 ```
 
-##k8k ops
-###practice 1: Create a Deployment
+## k8k ops
+### practice 1: Create a Deployment
 A Kubernetes Pod is a group of one or more Containers, tied together for the purposes of administration and networking. The Pod in this tutorial has only one Container. A Kubernetes Deployment checks on the health of your Pod and restarts the Pod’s Container if it terminates. Deployments are the recommended way to manage the creation and scaling of Pods.
 
   1. Use the kubectl create command to create a Deployment that manages a Pod. The Pod runs a Container based on the provided Docker image.
@@ -85,7 +88,7 @@ kubectl get events
 kubectl config view
 ```
 
-###practice 2: Create a Service
+### practice 2: Create a Service
 By default, the Pod is only accessible by its internal IP address within the Kubernetes cluster. To make the hello-node Container accessible from outside the Kubernetes virtual network, you have to expose the Pod as a Kubernetes Service.
 
 1. Expose the Pod to the public internet using the kubectl expose command:
@@ -119,7 +122,7 @@ Katacoda environment only: Type 30369 (see port opposite to 8080 in services out
 
 This opens up a browser window that serves your app and shows the “Hello World” message.
 
-###practice 3: deployments:
+### practice 3: deployments:
 
 1. create a new folder in your desktop called "practice3"
 2. create the following file "prcatice3/deployment.yaml"
@@ -169,7 +172,7 @@ kubectl get pods -l app=nginx
 kubectl describe pod <pod-name>
 ```   
 
-###practice 4: Updating the deployment
+### practice 4: Updating the deployment
 1. create the following yaml file "dep2.yaml"
 ```yaml
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
@@ -210,7 +213,7 @@ if you didn't create the file:
 ```
 
 
-##cleanup
+## cleanup
 Now you can clean up the resources you created in your cluster:
 
 ```kubectl delete service hello-node
