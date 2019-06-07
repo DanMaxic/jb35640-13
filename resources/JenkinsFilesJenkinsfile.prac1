@@ -1,0 +1,69 @@
+node {
+   def mvnHome
+   def artifactName
+   def artifactVersion
+   def _pom
+properties(
+   [parameters([
+      choice(choices: ['master', 'develop'], description: '', name: 'branch'),
+      choice(choices: ['docker', 'ansible', 'tomcat'], description: '', name: 'deployment_method'),
+      string(defaultValue: 'yatosh', description: '', name: 'artifact_name', trim: false)
+      ])])
+
+   stage('Preparation') { 
+      git 'https://github.com/zivkashtan/course.git'
+      mvnHome = tool name: '3.6' , type 'maven'
+      _pom = readMavenpom file: 'pom.xml'
+      artifactName=artifact_name
+      artifactVersion="${_pom.version}-${BUILD_NUMBER}"
+   }
+   stage('Build') {
+       {
+         if (branch==develop) {
+            echo "Building from ${branch}"
+            sh "'${MVN_HOME}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+         } else if (branch==master) {
+            echo "Building from ${branch}"
+            sh "'${MVN_HOME}/bin/mvn' clean package"
+         } else { 
+            echo "no suitable branch was selected please try again..."
+         }
+         sh label: "rename war file to ${artifactName}"
+         script: "mv web/target/*.war web/target/${artifactName}.war"
+         
+         writeFile file: """
+          FROM tomcat:8.0.20-jre8
+          COPY ./web/target/*.war /usr/local/tomcat/webapps/
+         """
+
+
+         sh label: 'building docker image',
+         script: "docker build -t ${artifactName}:${artifactVersion} ."
+      }
+   }
+   stage('Publish') {
+      withCredentials([
+         usernamePassword(credentialsId: 'nexus',
+          passwordVariable: 'passd',
+          usernameVariable: 'user')
+          ]) 
+      sh """
+		  docker login -u ${user} -p ${passd} localhost:8123
+		  docker tag ${artifactName}:${env.BUILD_ID} localhost:8123/${artifactName}:${artifactVersion}
+		  docker push localhost:8123/${artifactName}:${artifactVersion}
+		"""
+      nexusPublisher nexusInstanceId: 'nexus',
+       nexusRepositoryId: 'maven-snapshots',
+       packages: [[$class: 'MavenPackage',
+       mavenAssetList: [[
+          classifier: 'war',
+          extension: 'war',
+          filePath: 'web/target/${artifactName}.war'
+          ]],
+          mavenCoordinate: [
+             artifactId: '${artifactName}',
+             groupId: 'org.time-tracker',
+             packaging: 'war',
+             version: '${artifactVersion}']]]
+   }
+}
