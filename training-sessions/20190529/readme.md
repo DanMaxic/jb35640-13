@@ -96,7 +96,7 @@ spec:
 6. Remove the deployment
 
 
-LSN:
+SLN:
 Create the yaml file and name it something. I chose nginx-deployment.yaml. Create the deployment object by calling:
 ```bash
 kubectl create -f nginx-deployment.yaml
@@ -126,7 +126,7 @@ kubectl rollout undo deployment nginx-deployment --to-revision=x
 kubectl delete -f nginx-deployment.yaml
 ```
 
-##Exercise: Scaling Practice
+## Exercise: Scaling Practice
 Consider this YAML for an nginx deployment:
 
 ```yaml
@@ -257,7 +257,7 @@ spec:
         - containerPort: 80
 ```
 
-##Exercise: View the Logs
+## Exercise: View the Logs
 
 Create this object in your cluster:
 
@@ -292,7 +292,7 @@ SLN:
 5. The etcd logs are in the same directory as the logs for the previous question, only the name of the symlink begins with "etcd-", and also belongs to root.
 6. The API server also lives in the same directory and begins with "kube-apiserver-", and also belongs to root.
 
-##Exercise: Label ALL THE THINGS!
+## Exercise: Label ALL THE THINGS!
 Putting labels on objects in Kubernetes allow you to identify and select objects in as wide or granular style as you like.
 1. Label each of your nodes with a "color" tag. The master should be black; node 2 should be red; node 3 should be green and node 4 should be blue.
 2. If you have pods already running in your cluster in the default namespace, label them with the key/value pair running=beforeLabels.
