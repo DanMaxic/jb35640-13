@@ -1,0 +1,30 @@
+{
+  "variables": {
+    "source_image_family": "ubuntu-1604-lts",
+    "machine_type": "n1-standard-1",
+    "region": "us-west1",
+    "zone": "us-west1-b",
+    "project_id": "opsguru-gke-lab"
+  },
+  "builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "{{user `project_id`}}",
+      "machine_type": "{{user `machine_type`}}",
+      "source_image_family": "{{user `source_image_family`}}",
+      "region": "{{user `region`}}",
+      "zone": "{{user `zone`}}",
+      "image_description": "Prometheus base image",
+      "image_name": "prometheus-base-image",
+      "disk_size": 10,
+      "disk_type": "pd-standard",
+      "ssh_username": "root"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "prometheus-init.sh"
+    }
+  ]
+}
