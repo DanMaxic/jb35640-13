@@ -1,0 +1,15 @@
+# Prometheus Alert Rules
+
+groups:
+- name: operations
+  rules:
+
+  # Alert for any instance that has disk space 90% full
+  - alert: DiskFull
+    expr: 100 - 100 * (node_filesystem_free_bytes{device!~" by-uuid",device!~"/dev/loop.*",device!~"tmpfs"} / node_filesystem_size_bytes{device!~"/dev/loop.*",device!~"by-uuid",device!~"tmpfs"}) > 90 or 100 - 100 * (node_filesystem_free{device!~" by-uuid",device!~"/dev/loop.*",device!~"tmpfs"} / node_filesystem_size{device!~"/dev/loop.*",device!~"by-uuid",device!~"tmpfs"}) > 90
+    for: 10m
+    labels:
+      severity: slack
+    annotations:
+      summary: "Instance {{ $labels.instance }} has low disk"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has {{ $value }}% of space used)."

@@ -1,0 +1,14 @@
+# Prometheus Alert Rules
+
+groups:
+- name: operations
+  rules:
+
+  - alert: TargetGroupDown
+    expr:  sum(aws_applicationelb_un_healthy_host_count_sum{load_balancer=~"app/prod-internal-ecs-.*",}) by (target_group) > 1
+    for: 1m
+    labels:
+      severity: slack
+    annotations:
+      summary: "Target group {{$labels.target_group}} has unhealthy hosts"
+      description: "Target group {{$labels.target_group}} has unhealthy hosts"

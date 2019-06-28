@@ -1,0 +1,518 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "$$hashKey": "object:15329",
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Visualize AWS ELB Application Load Balancer metrics",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 43,
+  "iteration": 1532033328988,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "prometheus_datasource",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "TargetResponseTime_Average",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "aws_applicationelb_request_count_per_target_sum{target_group=~\".*/$targetgroup/.*\",job=\"aws_cloudwatch_$region\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "RequestCount_Sum",
+          "refId": "A"
+        },
+        {
+          "expr": "aws_applicationelb_target_response_time_average{target_group=~\".*/$targetgroup/.*\",job=\"aws_cloudwatch_$region\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "TargetResponseTime_Average",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "RequestCount / Latency",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 8,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "HTTPCode_ELB_4XX_Count_Sum",
+          "yaxis": 2
+        },
+        {
+          "alias": "HTTPCode_ELB_5XX_Count_Sum",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "aws_applicationelb_httpcode_target_2_xx_count_sum{target_group=~\".*/$targetgroup/.*\",job=\"aws_cloudwatch_$region\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "HTTPCode_Target_2XX_Count_Sum",
+          "refId": "A"
+        },
+        {
+          "expr": "aws_applicationelb_httpcode_target_3_xx_count_sum{target_group=~\".*/$targetgroup/.*\",job=\"aws_cloudwatch_$region\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "HTTPCode_Target_3XX_Count_Sum",
+          "refId": "B"
+        },
+        {
+          "expr": "aws_applicationelb_httpcode_target_4_xx_count_sum{target_group=~\".*/$targetgroup/.*\",job=\"aws_cloudwatch_$region\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "HTTPCode_Target_4XX_Count_Sum",
+          "refId": "C"
+        },
+        {
+          "expr": "aws_applicationelb_httpcode_target_5_xx_count_sum{target_group=~\".*/$targetgroup/.*\",job=\"aws_cloudwatch_$region\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "HTTPCode_Target_5XX_Count_Sum",
+          "refId": "D"
+        },
+        {
+          "expr": "sum by (job) (aws_applicationelb_httpcode_elb_4_xx_count_sum{job=\"aws_cloudwatch_$region\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "HTTPCode_ELB_4XX_Count_Sum",
+          "refId": "E"
+        },
+        {
+          "expr": "sum by (job) (aws_applicationelb_httpcode_elb_5_xx_count_sum{job=\"aws_cloudwatch_$region\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "HTTPCode_ELB_5XX_Count_Sum",
+          "refId": "F"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "HTTPCode",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 6,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum by (job) (aws_applicationelb_new_connection_count_sum{job=\"aws_cloudwatch_$region\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "NewConnectionCount_Sum",
+          "refId": "C"
+        },
+        {
+          "expr": "sum by (job) (aws_applicationelb_active_connection_count_sum{job=\"aws_cloudwatch_$region\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "ActiveConnectionCount_Sum",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ConnectionCount",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "prometheus_datasource",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 4,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum by (job) (aws_applicationelb_consumed_lcus_maximum{job=\"aws_cloudwatch_$region\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ConsumedLBCapacityUnits",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 16,
+  "style": "dark",
+  "tags": [
+    "cloudwatch",
+    "opsguru",
+    "prometheus"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": "eu-central-1",
+          "value": "eu-central-1"
+        },
+        "datasource": "prometheus_datasource",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Region",
+        "multi": false,
+        "name": "region",
+        "options": [],
+        "query": "label_values(job)",
+        "refresh": 1,
+        "regex": "/aws_cloudwatch_(.*)/",
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "opsguru-prod",
+          "value": "opsguru-prod"
+        },
+        "datasource": "prometheus_datasource",
+        "hide": 0,
+        "includeAll": false,
+        "label": "TargetGroup",
+        "multi": false,
+        "name": "targetgroup",
+        "options": [],
+        "query": "label_values({ job=\"aws_cloudwatch_$region\"},target_group)",
+        "refresh": 1,
+        "regex": "/targetgroup\\/(.*)/.*/",
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "AWS ELB Application Load Balancer",
+  "uid": "5UfPUrOmz",
+  "version": 14
+}

@@ -1,0 +1,13 @@
+groups:
+- name: operations
+  rules:
+
+#high cpu usage alert
+  - alert: InstanceHighCpu
+    expr: 100 - (avg by (instance) (rate(node_cpu{mode="idle"}[5m])) * 100) > 90
+    for: 20m
+    labels:
+      severity: slack
+    annotations:
+      summary: "High CPU Usage on {{ $labels.instance }}"
+      description: " CPU usage exceeds threshold (currently {{ $value|humanize }}% in use"
