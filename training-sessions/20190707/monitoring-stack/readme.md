@@ -1,3 +1,5 @@
 ````bash
-HOSTNAME=$(hostname) docker stack deploy -c docker-stack.yml prom
+git clone https://github.com/vegasbrianc/prometheus
+
+
 ````
